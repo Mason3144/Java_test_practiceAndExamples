@@ -24,6 +24,7 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.apache.commons:commons-lang3'
+	implementation 'com.google.code.gson:gson'
 }
 
 tasks.named('test') {

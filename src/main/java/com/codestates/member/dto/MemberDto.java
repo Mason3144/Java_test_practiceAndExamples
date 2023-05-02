@@ -4,6 +4,7 @@ import com.codestates.member.entity.Member;
 import com.codestates.stamp.Stamp;
 import com.codestates.validator.NotSpace;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.Email;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
 
 public class MemberDto {
     @Getter
+    @AllArgsConstructor
     public static class Post {
         @NotBlank
         @Email
@@ -26,6 +28,7 @@ public class MemberDto {
     }
 
     @Getter
+    @Builder
     public static class Patch {
         private long memberId;
 
@@ -47,7 +50,7 @@ public class MemberDto {
 
     @AllArgsConstructor
     @Getter
-    public static class response {
+    public static class Response {
         private long memberId;
         private String email;
         private String name;
