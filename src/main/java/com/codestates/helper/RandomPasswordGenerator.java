@@ -1,5 +1,6 @@
 package com.codestates.helper;
 
+import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Collections;

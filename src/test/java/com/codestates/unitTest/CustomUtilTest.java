@@ -83,7 +83,7 @@ public class CustomUtilTest {
                 ()->assertNull(wrongTest1),
                 ()->assertNull(wrongTest2),
                 ()->assertNull(wrongTest3),
-                ()->assertNotNull(wrongTest4,"Null값이 나와야 됩니다.")
+                ()->assertNull(wrongTest4,"Null값이 나와야 됩니다.")
         );
     }
 
