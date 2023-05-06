@@ -1,0 +1,13 @@
+// V2: 필드의 필수 값 여부 정보가 포함됨
+|===
+|필드명|타입|필수값 여부|설명
+
+{{#fields}}
+|{{#tableCellContent}}`+{{path}}+`{{/tableCellContent}}
+|{{#tableCellContent}}`+{{type}}+`{{/tableCellContent}}
+|{{#tableCellContent}}{{^optional}}true{{/optional}}{{/tableCellContent}}
+|{{#tableCellContent}}{{description}}{{/tableCellContent}}
+
+{{/fields}}
+
+|===

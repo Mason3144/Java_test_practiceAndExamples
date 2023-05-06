@@ -157,10 +157,14 @@ public class MemberControllerRestDocsTest {
                         ),
                         requestFields(
                                 List.of(
-                                        fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자").ignored(),
-                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름").optional(),
-                                        fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호").optional(),
-                                        fieldWithPath("memberStatus").type(JsonFieldType.STRING).description("회원 상태: MEMBER_ACTIVE / MEMBER_SLEEP / MEMBER_QUIT").optional()
+                                        fieldWithPath("memberId").type(JsonFieldType.NUMBER)
+                                                .description("회원 식별자").ignored(),
+                                        fieldWithPath("name").type(JsonFieldType.STRING)
+                                                .description("이름").optional(),
+                                        fieldWithPath("phone").type(JsonFieldType.STRING)
+                                                .description("휴대폰 번호").optional(),
+                                        fieldWithPath("memberStatus").type(JsonFieldType.STRING)
+                                                .description("회원 상태: MEMBER_ACTIVE / MEMBER_SLEEP / MEMBER_QUIT").optional()
                                 )
                         ),
                         responseFields(
