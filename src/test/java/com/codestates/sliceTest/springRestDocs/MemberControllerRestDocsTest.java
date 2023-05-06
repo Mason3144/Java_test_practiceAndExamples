@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -26,6 +27,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 
+import static org.springframework.restdocs.snippet.Attributes.*;
 import static com.codestates.helper.springRestDocs.ApiDocumentUtils.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
@@ -133,6 +135,11 @@ public class MemberControllerRestDocsTest {
 
         given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseDto);
 
+        // 유효성 검증에 사용된 애너테이션에 대한 정보를 추가
+        ConstraintDescriptions patchMemberConstraints = new ConstraintDescriptions(MemberDto.Patch.class); // 유효성 검증 조건 정보 객체 생성
+        List<String> nameDescriptions = patchMemberConstraints.descriptionsForProperty("name"); // name 필드의 유효성 검증 정보 얻기
+        List<String> phoneDescriptions = patchMemberConstraints.descriptionsForProperty("phone"); // phone 필드의 유효성 검증 정보 얻기
+
         // when
         ResultActions actions =
                 mockMvc.perform(
@@ -160,9 +167,9 @@ public class MemberControllerRestDocsTest {
                                         fieldWithPath("memberId").type(JsonFieldType.NUMBER)
                                                 .description("회원 식별자").ignored(),
                                         fieldWithPath("name").type(JsonFieldType.STRING)
-                                                .description("이름").optional(),
+                                                .description("이름").optional().attributes(key("constraints").value(nameDescriptions)),
                                         fieldWithPath("phone").type(JsonFieldType.STRING)
-                                                .description("휴대폰 번호").optional(),
+                                                .description("휴대폰 번호").optional().attributes(key("constraints").value(phoneDescriptions)),
                                         fieldWithPath("memberStatus").type(JsonFieldType.STRING)
                                                 .description("회원 상태: MEMBER_ACTIVE / MEMBER_SLEEP / MEMBER_QUIT").optional()
                                 )
@@ -239,7 +246,6 @@ public class MemberControllerRestDocsTest {
         params.add("page",page);
         params.add("size",size);
 
-
         mockMvc.perform(
                         get("/v11/members")
                                 .params(params)
@@ -252,8 +258,8 @@ public class MemberControllerRestDocsTest {
                         preprocessRequest(prettyPrint()),  // 순서 안지키면 컴파일 에러
                         preprocessResponse(prettyPrint()),
                         requestParameters(
-                                parameterWithName("page").description("출력될 페이지 위치"),
-                                parameterWithName("size").description("한 페이지당 출력될 최대 컨텐츠의 수")
+                                parameterWithName("page").description("출력될 페이지 위치").attributes(key("constraints").value("Must be a positive number")),
+                                parameterWithName("size").description("한 페이지당 출력될 최대 컨텐츠의 수").attributes(key("constraints").value("Must be a positive number"))
                         ),
                         responseFields(
                                 List.of(
